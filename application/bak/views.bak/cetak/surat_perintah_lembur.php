@@ -1,0 +1,65 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+	$pdf->SetMargins(20, 15, 20);
+	$title = 'Cetak Surat Perintah Lembur';
+	$pdf->SetTitle($title);
+	$pdf->AliasNbPages();
+	$pdf->AddPage();
+	$pdf->SetFont('Arial','UB',18);
+	$w = $pdf->GetStringWidth("SURAT PERINTAH LEMBUR");
+	$pdf->SetX(($pdf->w -$w)/2);
+	$pdf->Cell($w,9,"SURAT PERINTAH LEMBUR",0,0,'C');
+	$pdf->Ln(7);
+	$w = $pdf->GetStringWidth("No. ..../FC-HR/..../2017");
+	$pdf->SetX(($pdf->w -$w)/2);
+	$pdf->SetFont('Arial','',11);
+	$pdf->Cell($w,9,"No. ..../FC-HR/..../2017",0,0,'C');
+	$pdf->Ln(15);
+	$pdf->Cell(0,6,"Yang bertanda tangan dibawah ini, Saya :",0,1,'L');
+	$pdf->Cell(10);
+	$pdf->Cell(1,6,"Nama",0,0,'L');
+	$pdf->Cell(20);
+	$pdf->Cell(2,6," : Alif Bintoro",0,1,'L');
+	$pdf->Cell(10);
+	$pdf->Cell(1,6,"Posisi",0,0,'L');
+	$pdf->Cell(20);
+	$pdf->Cell(2,6," : Staff IT",0,1,'L');
+	$pdf->ln(5);
+	$pdf->Cell(0,6,"Memberikan penugasan kepada karyawan dibawah ini :",0,1,'L');
+    $pdf->Cell(10);
+	$pdf->Cell(1,6,"Nama",0,0,'L');
+    $pdf->Cell(20);
+    $pdf->Cell(2,6," : Alif Bintoro",0,1,'L');
+    $pdf->Cell(10);
+    $pdf->Cell(1,6,"Posisi",0,0,'L');
+    $pdf->Cell(20);
+    $pdf->Cell(2,6," : Staff IT",0,1,'L');
+    $pdf->Cell(10);
+    $pdf->Cell(1,6,"Divisi",0,0,'L');
+    $pdf->Cell(20);
+    $pdf->Cell(2,6," : IT",0,1,'L');
+    $pdf->Ln(5);
+	$pdf->Cell(0,6,"Untuk lembur pada :",0,1,'L');
+    $pdf->Ln(2);
+	$pdf->SetFont('Arial','B',11);
+    $pdf->SetX(($pdf->w - 168)/2);
+    $pdf->Cell(32,6,"Tanggal",1,0,'C');
+	$pdf->Cell(38,6,"Jam Mulai Lembur",1,0,'C');
+	$pdf->Cell(38,6,"Jam Selesai Lembur",1,0,'C');
+	$pdf->Cell(60,6,"Alasan Terjadi Kerja Lembur",1,1,'C');
+    $pdf->SetFont('Arial','',11);
+    $pdf->SetX(($pdf->w - 168)/2);
+    $pdf->SetWidths(array(32,38,38,60));
+    $pdf->Row(array(
+    			array("27 Nov 2017",'C'),
+    			array("06:00",'C'),
+    			array("09:00",'C'),
+    			array("Alasan Terjadi Kerja Lembur Alasan Terjadi Kerja Lembur Alasan Terjadi Kerja Lembur ",'J'),
+    		));
+	$pdf->ln(8);
+	$pdf->MultiCell(0,6,"Demikian Surat Perintah ini diberikan agar dapat dilaksanakan dengan tanggung jawab setelah selesai menyelesaikannya, dimohon menyampaikan laporan tertulis.");
+	$pdf->ln(8);
+	$pdf->Cell(0,6,"Surakarta, 25 April 2017",0,1,'R');
+	$pdf->Cell(0,6,"Staff IT",0,1,'R');
+	$pdf->ln(20);
+	$pdf->Cell(0,6,"(Alif Bintoro)",0,1,'R');
+	$pdf->Output("SuratPerintahLembur_0001_112017.pdf","I");
