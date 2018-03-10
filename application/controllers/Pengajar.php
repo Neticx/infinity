@@ -240,7 +240,6 @@ class Pengajar extends MY_Controller {
 			if($this->pengajar->cekIdPengajar($id)){
 				$pass = random_pass(6);
 				$row = $this->pengajar->getDataPengajar();
-
 				$data = array(
 						'id_pengajar' => $id,
 						'password' => md5(md5($pass)),

@@ -91,21 +91,32 @@
                   <?php
                     $menus = $this->session->userdata('role_user');
                     foreach($menus as $menu):
-                      if(array_key_exists('sub', $menu)):
-                  ?>
+                      if(!empty($menu['main']) && !empty($menu['sub'])): ?>
                       <li><a><i class="fa <?php echo $menu['main']['icon']; ?>"></i> <?php echo $menu['main']['nama']; ?> <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                          <?php foreach($menu['sub'] as $subMenu): ?>
+                          <?php
+                          if(array_key_exists('sub', $menu)):
+                           foreach($menu['sub'] as $subMenu): ?>
                             <li><a href="<?php echo base_url($subMenu['url']); ?>"><?php echo $subMenu['nama']; ?></a></li>
-                          <?php endforeach; ?>
+                          <?php endforeach; endif; ?>
                         </ul>
                       </li>
                   <?php
-                      else:
+                      elseif(empty($menu['main']) && !empty($menu['sub'])):
                   ?>
+                      <li><a><i class="fa fa-building ?>"></i> Other Menu <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <?php
+                          if(array_key_exists('sub', $menu)):
+                           foreach($menu['sub'] as $subMenu): ?>
+                            <li><a href="<?php echo base_url($subMenu['url']); ?>"><?php echo $subMenu['nama']; ?></a></li>
+                          <?php endforeach; endif; ?>
+                        </ul>
+                      </li>
+                  <?php else: ?>
                       <li><a href="<?php echo base_url($menu['main']['url']); ?>"><i class="fa <?php echo $menu['main']['icon']; ?>"></i> <?php echo $menu['main']['nama']; ?> </a></li>
                   <?php
-                      endif;
+                  endif;
                     endforeach;
                   ?>
                 </ul>
