@@ -313,7 +313,7 @@ class Cetak extends MY_Controller {
 		switch($jenis){
 			case 'permohonan_izin':
 
-				$data = array(
+				$data['data'] = array(
 					'pdf' => new pdf('P','mm','A4',$dataPDF),
 					'nama' => $this->input->post('nama'),
 					'jabatan' => $this->input->post('jabatan'),
