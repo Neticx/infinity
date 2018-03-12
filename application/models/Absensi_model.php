@@ -183,4 +183,79 @@ class Absensi_model extends CI_Model {
 							->result_array();
 	}
 
+	public function getCabang($id){
+		$this->db->select('nama');
+		$this->db->from('cabang');
+		return $this->db->get()->row_array();
+	}
+
+	public function getDaftarAbsensiPengajar($jenis, $bulan, $tahun, $start ,$end, $cabang)
+	{
+		if($jenis == 'range'){
+			$this->db->select('dabp.id_pengajar,  dabp.ket, p.nama');
+			$this->db->from('daftar_absen_pengajar dabp');
+			$this->db->join('absen_pengajar abp','abp.id_absen_pengajar = dabp.id_absen_pengajar', 'left');
+			$this->db->join('pengajar p','p.id_pengajar = dabp.id_pengajar', 'left');
+			$this->db->where('abp.id_cabang', $cabang);
+			$this->db->where('date(dabp.time) >=', $start);
+			$this->db->where('date(dabp.time) <=', $end);
+		}else{
+			$this->db->select('dabp.id_pengajar,  dabp.ket, p.nama');
+			$this->db->from('daftar_absen_pengajar dabp');
+			$this->db->join('absen_pengajar abp','abp.id_absen_pengajar = dabp.id_absen_pengajar', 'left');
+			$this->db->join('pengajar p','p.id_pengajar = dabp.id_pengajar', 'left');
+			$this->db->where('abp.id_cabang', $cabang);
+			$this->db->where('MONTH(dabp.time) =', $bulan);
+			$this->db->where('YEAR(dabp.time) =', $tahun);
+		}
+		$query 	= $this->db->get();
+		return $query->result_array();
+	}
+
+	public function getDaftarAbsensiSiswa($jenis, $bulan, $tahun, $start ,$end, $cabang)
+	{
+		if($jenis == 'range'){
+			$this->db->select('dabs.nis,  dabs.ket, p.nama');
+			$this->db->from('daftar_absen_siswa  dabs');
+			$this->db->join('absen_siswa abs','abs.id_absen_siswa = dabs.id_absen_siswa', 'left');
+			$this->db->join('siswa p','p.nis = dabs.nis', 'left');
+			$this->db->where('abs.id_cabang', $cabang);
+			$this->db->where('date(dabs.time) >=', $start);
+			$this->db->where('date(dabs.time) <=', $end);
+		}else{
+			$this->db->select('dabs.nis,  dabs.ket, p.nama');
+			$this->db->from('daftar_absen_siswa  dabs');
+			$this->db->join('absen_siswa abs','abs.id_absen_siswa = dabs.id_absen_siswa', 'left');
+			$this->db->join('siswa p','p.nis = dabs.nis', 'left');
+			$this->db->where('abs.id_cabang', $cabang);
+			$this->db->where('MONTH(dabs.time) =', $bulan);
+			$this->db->where('YEAR(dabs.time) =', $tahun);
+		}
+		$query 	= $this->db->get();
+		return $query->result_array();
+	}
+
+	public function getDaftarAbsensiKaryawan($jenis, $bulan, $tahun, $start ,$end, $cabang)
+	{
+		if($jenis == 'range'){
+			$this->db->select('dabp.id_user,  dabp.ket, p.nama');
+			$this->db->from('daftar_absen_pegawai  dabp');
+			$this->db->join('absen_pegawai abp','abp.id_absen_pegawai = dabp.id_absen_pegawai', 'left');
+			$this->db->join('user p','p.id_user = dabp.id_user', 'left');
+			$this->db->where('abp.id_cabang', $cabang);
+			$this->db->where('date(dabp.time) >=', $start);
+			$this->db->where('date(dabp.time) <=', $end);
+		}else{
+			$this->db->select('dabp.id_user,  dabp.ket, p.nama');
+			$this->db->from('daftar_absen_pegawai  dabp');
+			$this->db->join('absen_pegawai abp','abp.id_absen_pegawai = dabp.id_absen_pegawai', 'left');
+			$this->db->join('user p','p.id_user = dabp.id_user', 'left');
+			$this->db->where('abp.id_cabang', $cabang);
+			$this->db->where('MONTH(dabp.time) =', $bulan);
+			$this->db->where('YEAR(dabp.time) =', $tahun);
+		}
+		$query 	= $this->db->get();
+		return $query->result_array();
+	}
+
 }

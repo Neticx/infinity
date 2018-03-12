@@ -27,15 +27,31 @@ class Absensi extends MY_Controller {
 			else{
 				switch($jenis){
 					case 'range':
-						$data = array(
-								'title' => 'Daftar Absensi Pengajar'
+						$start 	= date("Y-m-d", strtotime($_GET['start']));						
+						$end 	= date("Y-m-d", strtotime($_GET['end']));
+						$cabang = $_GET['cabangID'];
+							$data = array(
+								'title' 		=> 'Daftar Absensi Pengajar',
+								'data_absensi' 	=> $this->absensi->getDaftarAbsensiPengajar('range', null, null, $start, $end, $cabang),
+								'nama_cabang'	=> $this->absensi->getCabang($cabang)
 							);
+						$this->_render('absensi/daftar_absensi_pengajar',$data);
 					break;
 
 					case 'bulan':
+						$bulan 	= $_GET['bulan'];
+						$tahun 	= $_GET['tahun'];
 						$data = array(
-								'title' => 'Daftar Absensi Pengajar'
+								'title' => 'Daftar Absensi Siswa'
 							);
+						$cabang = $_GET['cabangID'];
+						$data = array(
+								'title' 		=> 'Daftar Absensi Pengajar',
+								'data_absensi' 	=> $this->absensi->getDaftarAbsensiPengajar('bulan', $bulan, $tahun, null, null, $cabang),
+								'nama_cabang'	=> $this->absensi->getCabang($cabang)
+
+						);
+						$this->_render('absensi/daftar_absensi_pengajar',$data);
 					break;
 
 					default:
@@ -75,15 +91,33 @@ class Absensi extends MY_Controller {
 			else{
 				switch($jenis){
 					case 'range':
-						$data = array(
-								'title' => 'Daftar Absensi Siswa'
+						$start 	= $_GET['start'];
+						$start 	= date("Y-m-d", strtotime($start));						
+						$end 	= $_GET['end'];
+						$end 	= date("Y-m-d", strtotime($end));
+						$cabang = $_GET['cabangID'];
+							$data = array(
+								'title' 		=> 'Daftar Absensi Siswa',
+								'data_absensi' 	=> $this->absensi->getDaftarAbsensiSiswa('range', null, null, $start, $end, $cabang),
+								'nama_cabang'	=> $this->absensi->getCabang($cabang)
 							);
+						$this->_render('absensi/daftar_absensi_siswa',$data);
 					break;
 
 					case 'bulan':
+						$bulan 	= $_GET['bulan'];
+						$tahun 	= $_GET['tahun'];
 						$data = array(
 								'title' => 'Daftar Absensi Siswa'
 							);
+						$cabang = $_GET['cabangID'];
+						$data = array(
+								'title' 		=> 'Daftar Absensi Siswa',
+								'data_absensi' 	=> $this->absensi->getDaftarAbsensiSiswa('bulan', $bulan, $tahun, null, null, $cabang),
+								'nama_cabang'	=> $this->absensi->getCabang($cabang)
+
+						);
+						$this->_render('absensi/daftar_absensi_siswa',$data);
 					break;
 
 					default:
@@ -123,15 +157,33 @@ class Absensi extends MY_Controller {
 			else{
 				switch($jenis){
 					case 'range':
-						$data = array(
-								'title' => 'Daftar Absensi Karyawan'
+						$start 	= $_GET['start'];
+						$start 	= date("Y-m-d", strtotime($start));						
+						$end 	= $_GET['end'];
+						$end 	= date("Y-m-d", strtotime($end));
+						$cabang = $_GET['cabangID'];
+							$data = array(
+								'title' 		=> 'Daftar Absensi Karyawan',
+								'data_absensi' 	=> $this->absensi->getDaftarAbsensiKaryawan('range', null, null, $start, $end, $cabang),
+								'nama_cabang'	=> $this->absensi->getCabang($cabang)
 							);
+						$this->_render('absensi/daftar_absensi_karyawan',$data);
 					break;
 
 					case 'bulan':
+						$bulan 	= $_GET['bulan'];
+						$tahun 	= $_GET['tahun'];
 						$data = array(
 								'title' => 'Daftar Absensi Karyawan'
 							);
+						$cabang = $_GET['cabangID'];
+						$data = array(
+								'title' 		=> 'Daftar Absensi Karyawan',
+								'data_absensi' 	=> $this->absensi->getDaftarAbsensiKaryawan('bulan', $bulan, $tahun, null, null, $cabang),
+								'nama_cabang'	=> $this->absensi->getCabang($cabang)
+
+						);
+						$this->_render('absensi/daftar_absensi_karyawan',$data);
 					break;
 
 					default:

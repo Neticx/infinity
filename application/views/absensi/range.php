@@ -67,6 +67,7 @@
 			</div>
 		</div>
 	</div>
+	<?= $halaman; ?>
 	<script type='text/javascript'>
 		function goToPage(jenis){
 			if(jenis=='bulan'){
